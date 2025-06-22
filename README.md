@@ -1,3 +1,4 @@
+
 # Azure Data Engineering Project 1 - End-to-End Pipeline
 
 This project demonstrates an end-to-end data engineering pipeline using Azure tools:
@@ -61,3 +62,7 @@ This project demonstrates an end-to-end data engineering pipeline using Azure to
 - **Azure Synapse Analytics**
 - **Power BI**
 - **SQL & PySpark**
+=======
+# Azure_project1
+This project is an end to end data engineering project.
+>>>>>>> f56cd601e1aec1ca5b33d0f34a7c5343cff198e7
