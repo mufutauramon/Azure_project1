@@ -1,0 +1,9 @@
+{
+	"name": "data-factory-copying-data",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ebc79b32-fc89-4a80-a03c-ab0bad972124",
+		"tenantId": "38ee4e77-e408-42f7-a9c5-0bffe9c84dd9"
+	}
+}

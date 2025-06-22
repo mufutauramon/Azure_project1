@@ -1,0 +1,17 @@
+{
+	"name": "targetdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "warehouselinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Customer"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
