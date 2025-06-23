@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "data-factory-copying-data"
+		},
+		"Onpremlinkedservice_password": {
+			"value": ""
+		},
+		"cloudlinkedservice_accountKey": {
+			"value": ""
+		},
+		"Onpremlinkedservice_properties_typeProperties_server": {
+			"value": "RAMON\\SQLEXPRESS"
+		},
+		"Onpremlinkedservice_properties_typeProperties_database": {
+			"value": "AdventureWorks2008R2"
+		},
+		"Onpremlinkedservice_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"cloudlinkedservice_properties_typeProperties_url": {
+			"value": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
+		}
+	}
+}

@@ -1,0 +1,274 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "data-factory-copying-data"
+		},
+		"cloudlinkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'cloudlinkedservice'"
+		},
+		"Onpremlinkedservice_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Onpremlinkedservice'"
+		},
+		"cloudlinkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
+		},
+		"Onpremlinkedservice_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "RAMON\\SQLEXPRESS"
+		},
+		"Onpremlinkedservice_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2008R2"
+		},
+		"Onpremlinkedservice_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/cloudlinkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('cloudlinkedservice_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('cloudlinkedservice_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bronzelayerdataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cloudlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"schema": {
+						"type": "string"
+					},
+					"table": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@{concat(dataset().table, '.JSON')}",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@{concat(dataset().schema, '/',dataset().table)}",
+							"type": "Expression"
+						},
+						"fileSystem": "p1bronzerawdata"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/cloudlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Onpremlinkedservice')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('Onpremlinkedservice_properties_typeProperties_server')]",
+					"database": "[parameters('Onpremlinkedservice_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('Onpremlinkedservice_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Onpremlinkedservice_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Onpremdataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Onpremlinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Onpremlinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "project1lookup",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT \ns.name AS SchemaName,\nt.name AS TableName\nFROM sys.Tables t\nINNER JOIN sys.Schemas s \nON t.schema_id = s.schema_id\nWHERE s.name ='Sales' OR s.name ='HumanResources'\nOR s.name ='Person' OR s.name ='Production'\n",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "Onpremdataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "project1lookup",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Copy data1').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": {
+												"value": "SELECT * FROM @{item().SchemaName}.@{item().TableName}",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "Onpremdataset",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "bronzelayerdataset",
+											"type": "DatasetReference",
+											"parameters": {
+												"schema": {
+													"value": "@item().SchemaName",
+													"type": "Expression"
+												},
+												"table": {
+													"value": "@item().TableName",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Onpremdataset')]",
+				"[concat(variables('factoryId'), '/datasets/bronzelayerdataset')]"
+			]
+		}
+	]
+}
