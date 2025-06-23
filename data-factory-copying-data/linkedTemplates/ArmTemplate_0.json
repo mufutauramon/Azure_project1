@@ -195,7 +195,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"items": {
-								"value": "@activity('Copy data1').output.value",
+								"value": "@activity('project1lookup').output.value",
 								"type": "Expression"
 							},
 							"activities": [
