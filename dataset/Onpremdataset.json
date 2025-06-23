@@ -1,0 +1,12 @@
+{
+	"name": "Onpremdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Onpremlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
