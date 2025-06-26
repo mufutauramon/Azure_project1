@@ -1,0 +1,17 @@
+{
+	"name": "targetdblinked service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "project8server.database.windows.net",
+			"database": "project8database",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "Ramon",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEUyMDRFQTAxLTM4MjUtNEQ0Ri1CMkYxLThBNTlFNzQyMDdDQl9jMTIzNDNiNi01YmU5LTQyNzAtOTBiNy0wYzc1NjQxODUzZTIiDQp9"
+		}
+	}
+}
