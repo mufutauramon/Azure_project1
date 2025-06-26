@@ -1,0 +1,12 @@
+{
+	"name": "sqldataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "targetdblinked service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
