@@ -5,11 +5,32 @@
 		"factoryName": {
 			"value": "data-factory-copying-data"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_password": {
+			"value": ""
+		},
 		"Onpremlinkedservice_password": {
 			"value": ""
 		},
 		"cloudlinkedservice_accountKey": {
 			"value": ""
+		},
+		"targetdblinked service_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sdproject8source.dfs.core.windows.net/"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"value": "dbtargetsynapse.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"value": "targentdata"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
+			"value": "Ramon"
 		},
 		"Onpremlinkedservice_properties_typeProperties_server": {
 			"value": "RAMON\\SQLEXPRESS"
@@ -22,6 +43,15 @@
 		},
 		"cloudlinkedservice_properties_typeProperties_url": {
 			"value": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
+		},
+		"targetdblinked service_properties_typeProperties_server": {
+			"value": "project8server.database.windows.net"
+		},
+		"targetdblinked service_properties_typeProperties_database": {
+			"value": "project8database"
+		},
+		"targetdblinked service_properties_typeProperties_userName": {
+			"value": "Ramon"
 		},
 		"containerUri": {
 			"value": ""
