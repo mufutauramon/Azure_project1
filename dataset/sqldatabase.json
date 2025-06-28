@@ -1,0 +1,16 @@
+{
+	"name": "sqldatabase",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldatalinked",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Sales_LOAD"
+		}
+	}
+}

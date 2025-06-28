@@ -16,35 +16,32 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"recursive": true
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings",
-							"compressionProperties": {
-								"type": "ZipDeflateReadSettings"
-							}
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						}
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary1",
+						"referenceName": "sourcedataset",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary2",
+						"referenceName": "sqldatabase",
 						"type": "DatasetReference"
 					}
 				]
