@@ -1,0 +1,18 @@
+{
+	"name": "DestinationDataset_06m",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "safe",
+				"fileSystem": "stagging"
+			}
+		}
+	}
+}
