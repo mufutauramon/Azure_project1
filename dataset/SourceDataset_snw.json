@@ -1,0 +1,21 @@
+{
+	"name": "SourceDataset_snw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "pdatalinked",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Fastest"
+			}
+		}
+	}
+}
