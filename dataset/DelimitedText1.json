@@ -14,7 +14,6 @@
 				"fileSystem": "landing"
 			},
 			"columnDelimiter": ",",
-			"rowDelimiter": "",
 			"compressionCodec": "ZipDeflate",
 			"compressionLevel": "Optimal",
 			"escapeChar": "\\",
