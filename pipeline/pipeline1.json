@@ -38,13 +38,10 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"sink": {
-									"name": "RowId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
+								"source": {
+									"name": "Retailer",
+									"type": "String"
+								},
 								"sink": {
 									"name": "Retailer",
 									"type": "String",
@@ -52,6 +49,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "SalesMonth",
+									"type": "String"
+								},
 								"sink": {
 									"name": "SalesMonth",
 									"type": "DateTime",
@@ -59,6 +60,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "Product",
+									"type": "String"
+								},
 								"sink": {
 									"name": "Product",
 									"type": "String",
@@ -66,13 +71,10 @@
 								}
 							},
 							{
-								"sink": {
-									"name": "ManufacturerProductCode",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
+								"source": {
+									"name": "SalesValue",
+									"type": "String"
+								},
 								"sink": {
 									"name": "SalesValueUSD",
 									"type": "Decimal",
@@ -82,6 +84,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "UnitsSold",
+									"type": "String"
+								},
 								"sink": {
 									"name": "UnitsSold",
 									"type": "Int32",
