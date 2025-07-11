@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "2020-04.csv",
-				"folderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/CandyShack",
+				"fileName": "*.json",
+				"folderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/SugarCube",
 				"fileSystem": "stagging"
 			},
 			"columnDelimiter": ",",
