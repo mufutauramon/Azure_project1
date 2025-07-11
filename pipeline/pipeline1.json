@@ -3,113 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/SugarCube",
-							"wildcardFileName": "*.json",
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['Month']"
-								},
-								"sink": {
-									"name": "SalesMonth",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['Company']"
-								},
-								"sink": {
-									"name": "Retailer",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['Product']"
-								},
-								"sink": {
-									"name": "Product",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['ManufacturerProductCode']"
-								},
-								"sink": {
-									"name": "ManufacturerProductCode",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "['Units']"
-								},
-								"sink": {
-									"name": "UnitsSold",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "['Value']"
-								},
-								"sink": {
-									"name": "SalesValueUSD",
-									"type": "Decimal"
-								}
-							}
-						],
-						"collectionReference": "$['Sales']",
-						"mapComplexValuesToString": false
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Jsondataset",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "sqldatabase",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Copy data2",
 				"type": "Copy",
 				"dependsOn": [],
@@ -205,7 +98,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Parquetdataset",
+						"referenceName": "Parquet1",
 						"type": "DatasetReference"
 					}
 				]
