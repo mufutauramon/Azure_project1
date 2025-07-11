@@ -113,6 +113,28 @@
 									"type": "Int32",
 									"physicalType": "int"
 								}
+							},
+							{
+								"source": {
+									"name": "AuditID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AuditID",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								}
+							},
+							{
+								"source": {
+									"name": "Filepath",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Filepath",
+									"type": "String",
+									"physicalType": "varchar"
+								}
 							}
 						],
 						"typeConversion": true,
