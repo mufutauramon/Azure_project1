@@ -11,12 +11,40 @@
 					},
 					"name": "exceldatasource",
 					"description": "The source is the excel file for jollygoods"
+				},
+				{
+					"linkedService": {
+						"referenceName": "datalinkedservice",
+						"type": "LinkedServiceReference"
+					},
+					"name": "exchangerate4jolly",
+					"description": "The exchange conversion rate"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sqldatabase",
+						"type": "DatasetReference"
+					},
+					"name": "targent"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "filtercurrencytoUSD"
+				},
+				{
+					"name": "lookupexchangerate"
+				},
+				{
+					"name": "derivedColumnforUSD"
+				},
+				{
+					"name": "selecttargetdata"
 				}
 			],
 			"scriptLines": [
@@ -30,7 +58,64 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> exceldatasource",
-				"exceldatasource filter(Product!= 'Month Total') ~> filter1"
+				"source(output(",
+				"          FromCurrency as string,",
+				"          ToCurrency as string,",
+				"          Date as date,",
+				"          ExchangeRate as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'excel',",
+				"     fileSystem: 'stagging',",
+				"     folderPath: 'Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData',",
+				"     fileName: 'ExchangeRates.xlsx',",
+				"     sheetName: 'Sheet1',",
+				"     firstRowAsHeader: true) ~> exchangerate4jolly",
+				"exceldatasource filter(Product!= 'Month Total') ~> filter1",
+				"exchangerate4jolly filter(ToCurrency=='USD') ~> filtercurrencytoUSD",
+				"filter1, filtercurrencytoUSD lookup(Currency == FromCurrency",
+				"     && Period == Date,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookupexchangerate",
+				"lookupexchangerate derive(SalesValueUSD = round({Unit Price}*{Units Sold}*ExchangeRate,2)) ~> derivedColumnforUSD",
+				"derivedColumnforUSD select(mapColumn(",
+				"          Product,",
+				"          {Unit Price},",
+				"          {Units Sold},",
+				"          Date,",
+				"          SalesValueUSD",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selecttargetdata",
+				"selecttargetdata sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          RowId as integer,",
+				"          Retailer as string,",
+				"          SalesMonth as date,",
+				"          Product as string,",
+				"          ManufacturerProductCode as string,",
+				"          SalesValueUSD as decimal(18,2),",
+				"          UnitsSold as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          SalesMonth = Date,",
+				"          Product,",
+				"          SalesValueUSD,",
+				"          UnitsSold = {Units Sold}",
+				"     )) ~> targent"
 			]
 		}
 	}
