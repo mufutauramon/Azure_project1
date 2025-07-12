@@ -48,6 +48,9 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     parameter1 as string ($parameter1)",
+				"}",
 				"source(output(",
 				"          Period as date,",
 				"          Product as string,",
