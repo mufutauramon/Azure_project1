@@ -7,67 +7,27 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "data-factory-copying-data"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"datalinkedservice_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+			"metadata": "Secure string for 'accountKey' of 'datalinkedservice'"
 		},
-		"AzureSynapseAnalytics1_password": {
+		"sqldatalinked_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzureSynapseAnalytics1'"
+			"metadata": "Secure string for 'password' of 'sqldatalinked'"
 		},
-		"Onpremlinkedservice_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Onpremlinkedservice'"
-		},
-		"cloudlinkedservice_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'cloudlinkedservice'"
-		},
-		"targetdblinked service_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'targetdblinked service'"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
+		"datalinkedservice_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://sdproject8source.dfs.core.windows.net/"
+			"defaultValue": "https://sdadfdata.dfs.core.windows.net/"
 		},
-		"AzureSynapseAnalytics1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "dbtargetsynapse.sql.azuresynapse.net"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "targentdata"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "Ramon"
-		},
-		"Onpremlinkedservice_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "RAMON\\SQLEXPRESS"
-		},
-		"Onpremlinkedservice_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "AdventureWorks2008R2"
-		},
-		"Onpremlinkedservice_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "sa"
-		},
-		"cloudlinkedservice_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
-		},
-		"targetdblinked service_properties_typeProperties_server": {
+		"sqldatalinked_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "project8server.database.windows.net"
 		},
-		"targetdblinked service_properties_typeProperties_database": {
+		"sqldatalinked_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "project8database"
+			"defaultValue": "dbprojectadf"
 		},
-		"targetdblinked service_properties_typeProperties_userName": {
+		"sqldatalinked_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Ramon"
 		},
@@ -98,53 +58,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureDataLakeStorage1_accountKey": {
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					"datalinkedservice_accountKey": {
+						"value": "[parameters('datalinkedservice_accountKey')]"
 					},
-					"AzureSynapseAnalytics1_password": {
-						"value": "[parameters('AzureSynapseAnalytics1_password')]"
+					"sqldatalinked_password": {
+						"value": "[parameters('sqldatalinked_password')]"
 					},
-					"cloudlinkedservice_accountKey": {
-						"value": "[parameters('cloudlinkedservice_accountKey')]"
+					"datalinkedservice_properties_typeProperties_url": {
+						"value": "[parameters('datalinkedservice_properties_typeProperties_url')]"
 					},
-					"targetdblinked service_password": {
-						"value": "[parameters('targetdblinked service_password')]"
+					"sqldatalinked_properties_typeProperties_server": {
+						"value": "[parameters('sqldatalinked_properties_typeProperties_server')]"
 					},
-					"Onpremlinkedservice_password": {
-						"value": "[parameters('Onpremlinkedservice_password')]"
+					"sqldatalinked_properties_typeProperties_database": {
+						"value": "[parameters('sqldatalinked_properties_typeProperties_database')]"
 					},
-					"AzureDataLakeStorage1_properties_typeProperties_url": {
-						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
-					},
-					"AzureSynapseAnalytics1_properties_typeProperties_server": {
-						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_server')]"
-					},
-					"AzureSynapseAnalytics1_properties_typeProperties_database": {
-						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_database')]"
-					},
-					"AzureSynapseAnalytics1_properties_typeProperties_userName": {
-						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_userName')]"
-					},
-					"cloudlinkedservice_properties_typeProperties_url": {
-						"value": "[parameters('cloudlinkedservice_properties_typeProperties_url')]"
-					},
-					"targetdblinked service_properties_typeProperties_server": {
-						"value": "[parameters('targetdblinked service_properties_typeProperties_server')]"
-					},
-					"targetdblinked service_properties_typeProperties_database": {
-						"value": "[parameters('targetdblinked service_properties_typeProperties_database')]"
-					},
-					"targetdblinked service_properties_typeProperties_userName": {
-						"value": "[parameters('targetdblinked service_properties_typeProperties_userName')]"
-					},
-					"Onpremlinkedservice_properties_typeProperties_server": {
-						"value": "[parameters('Onpremlinkedservice_properties_typeProperties_server')]"
-					},
-					"Onpremlinkedservice_properties_typeProperties_database": {
-						"value": "[parameters('Onpremlinkedservice_properties_typeProperties_database')]"
-					},
-					"Onpremlinkedservice_properties_typeProperties_userName": {
-						"value": "[parameters('Onpremlinkedservice_properties_typeProperties_userName')]"
+					"sqldatalinked_properties_typeProperties_userName": {
+						"value": "[parameters('sqldatalinked_properties_typeProperties_userName')]"
 					}
 				}
 			},

@@ -7,69 +7,29 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "data-factory-copying-data"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"datalinkedservice_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+			"metadata": "Secure string for 'accountKey' of 'datalinkedservice'"
 		},
-		"AzureSynapseAnalytics1_password": {
+		"sqldatalinked_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzureSynapseAnalytics1'"
+			"metadata": "Secure string for 'password' of 'sqldatalinked'"
 		},
-		"cloudlinkedservice_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'cloudlinkedservice'"
-		},
-		"targetdblinked service_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'targetdblinked service'"
-		},
-		"Onpremlinkedservice_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Onpremlinkedservice'"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
+		"datalinkedservice_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://sdproject8source.dfs.core.windows.net/"
+			"defaultValue": "https://sdadfdata.dfs.core.windows.net/"
 		},
-		"AzureSynapseAnalytics1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "dbtargetsynapse.sql.azuresynapse.net"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "targentdata"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "Ramon"
-		},
-		"cloudlinkedservice_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
-		},
-		"targetdblinked service_properties_typeProperties_server": {
+		"sqldatalinked_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "project8server.database.windows.net"
 		},
-		"targetdblinked service_properties_typeProperties_database": {
+		"sqldatalinked_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "project8database"
+			"defaultValue": "dbprojectadf"
 		},
-		"targetdblinked service_properties_typeProperties_userName": {
+		"sqldatalinked_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Ramon"
-		},
-		"Onpremlinkedservice_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "RAMON\\SQLEXPRESS"
-		},
-		"Onpremlinkedservice_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "AdventureWorks2008R2"
-		},
-		"Onpremlinkedservice_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "sa"
 		}
 	},
 	"variables": {
@@ -77,78 +37,39 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"name": "[concat(parameters('factoryName'), '/datalinkedservice')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"url": "[parameters('datalinkedservice_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+						"value": "[parameters('datalinkedservice_accountKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSynapseAnalytics1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDW",
-				"typeProperties": {
-					"server": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_server')]",
-					"database": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('AzureSynapseAnalytics1_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/cloudlinkedservice')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('cloudlinkedservice_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('cloudlinkedservice_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/targetdblinked service')]",
+			"name": "[concat(parameters('factoryName'), '/sqldatalinked')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"server": "[parameters('targetdblinked service_properties_typeProperties_server')]",
-					"database": "[parameters('targetdblinked service_properties_typeProperties_database')]",
+					"server": "[parameters('sqldatalinked_properties_typeProperties_server')]",
+					"database": "[parameters('sqldatalinked_properties_typeProperties_database')]",
 					"encrypt": "mandatory",
 					"trustServerCertificate": true,
 					"authenticationType": "SQL",
-					"userName": "[parameters('targetdblinked service_properties_typeProperties_userName')]",
+					"userName": "[parameters('sqldatalinked_properties_typeProperties_userName')]",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('targetdblinked service_password')]"
+						"value": "[parameters('sqldatalinked_password')]"
 					}
 				}
 			},
@@ -165,42 +86,101 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/bronzelayerdataset')]",
+			"name": "[concat(parameters('factoryName'), '/Excelsource')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "cloudlinkedservice",
+					"referenceName": "datalinkedservice",
 					"type": "LinkedServiceReference"
 				},
-				"parameters": {
-					"schema": {
-						"type": "string"
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "SALES",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Sales Apr-Sep 2020.xlsx",
+						"folderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/JollyGood",
+						"fileSystem": "stagging"
 					},
-					"table": {
-						"type": "string"
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Period",
+						"type": "String"
+					},
+					{
+						"name": "Product",
+						"type": "String"
+					},
+					{
+						"name": "Unit Price",
+						"type": "String"
+					},
+					{
+						"name": "Currency",
+						"type": "String"
+					},
+					{
+						"name": "Units Sold",
+						"type": "String"
 					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Jsondataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalinkedservice",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@{concat(dataset().table, '.JSON')}",
-							"type": "Expression"
-						},
-						"folderPath": {
-							"value": "@{concat(dataset().schema, '/',dataset().table)}",
-							"type": "Expression"
-						},
-						"fileSystem": "p1bronzerawdata"
+						"fileName": "00816cd4-0d98-4505-8b8f-8b3ba08aab31.json",
+						"folderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/HandyCandy",
+						"fileSystem": "stagging"
 					}
 				},
 				"schema": {}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/cloudlinkedservice')]"
+				"[concat(variables('factoryId'), '/linkedServices/datalinkedservice')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Parquet1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalinkedservice",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "handycandy",
+						"fileSystem": "parquetfile"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalinkedservice')]"
 			]
 		},
 		{
@@ -209,7 +189,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
+					"referenceName": "datalinkedservice",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -217,8 +197,9 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Suppliers.csv",
-						"fileSystem": "datasource"
+						"fileName": "Sales.csv",
+						"folderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/SweetTreats/Apr-20",
+						"fileSystem": "stagging"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -227,134 +208,97 @@
 				},
 				"schema": [
 					{
-						"name": "SupplierID",
+						"name": "Retailer",
 						"type": "String"
 					},
 					{
-						"name": "CompanyName",
+						"name": "SkuCode",
 						"type": "String"
 					},
 					{
-						"name": "ContactName",
+						"name": "Product",
 						"type": "String"
 					},
 					{
-						"name": "ContactTitle",
+						"name": "SalesMonth",
 						"type": "String"
 					},
 					{
-						"name": "Address",
+						"name": "SalesValue",
 						"type": "String"
 					},
 					{
-						"name": "City",
-						"type": "String"
-					},
-					{
-						"name": "Region",
-						"type": "String"
-					},
-					{
-						"name": "PostalCode",
-						"type": "String"
-					},
-					{
-						"name": "Country",
-						"type": "String"
-					},
-					{
-						"name": "Phone",
-						"type": "String"
-					},
-					{
-						"name": "Fax",
-						"type": "String"
-					},
-					{
-						"name": "HomePage",
+						"name": "UnitsSold",
 						"type": "String"
 					}
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/datalinkedservice')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/sqldataset')]",
+			"name": "[concat(parameters('factoryName'), '/sqldatabase')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "targetdblinked service",
+					"referenceName": "sqldatalinked",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
+				"schema": [
+					{
+						"name": "RowId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Retailer",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SalesMonth",
+						"type": "date"
+					},
+					{
+						"name": "Product",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ManufacturerProductCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SalesValueUSD",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "UnitsSold",
+						"type": "int",
+						"precision": 10
+					}
+				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Suppliers"
+					"table": "Sales_LOAD"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/targetdblinked service')]"
+				"[concat(variables('factoryId'), '/linkedServices/sqldatalinked')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/synapsedataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSynapseAnalytics1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlDWTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalytics1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Onpremlinkedservice')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('Onpremlinkedservice_properties_typeProperties_server')]",
-					"database": "[parameters('Onpremlinkedservice_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('Onpremlinkedservice_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Onpremlinkedservice_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/copy2db')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copytoazuredatabase",
+						"name": "Copy data2",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -368,9 +312,24 @@
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "AuditID",
+										"value": {
+											"value": "@pipeline().RunId",
+											"type": "Expression"
+										}
+									},
+									{
+										"name": "Filepath",
+										"value": "$$FILEPATH"
+									}
+								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
+									"wildcardFolderPath": "Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/SweetTreats",
+									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -379,12 +338,100 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
+								"preCopyScript": "Truncate table [dbo].[Sales_LOAD]",
 								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Retailer",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Retailer",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesMonth",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SalesMonth",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Product",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Product",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesValueUSD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SalesValueUSD",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 2,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "UnitsSold",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "UnitsSold",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "AuditID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "AuditID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										}
+									},
+									{
+										"source": {
+											"name": "Filepath",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Filepath",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
@@ -401,7 +448,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "sqldataset",
+								"referenceName": "sqldatabase",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -415,36 +462,147 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/sourcedataset')]",
-				"[concat(variables('factoryId'), '/datasets/sqldataset')]"
+				"[concat(variables('factoryId'), '/datasets/sqldatabase')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Onpremdataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/dataflow4excel')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Onpremlinkedservice",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Excelsource",
+								"type": "DatasetReference"
+							},
+							"name": "exceldatasource",
+							"description": "The source is the excel file for jollygoods"
+						},
+						{
+							"linkedService": {
+								"referenceName": "datalinkedservice",
+								"type": "LinkedServiceReference"
+							},
+							"name": "exchangerate4jolly",
+							"description": "The exchange conversion rate"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "sqldatabase",
+								"type": "DatasetReference"
+							},
+							"name": "targent"
+						}
+					],
+					"transformations": [
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "filtercurrencytoUSD"
+						},
+						{
+							"name": "lookupexchangerate"
+						},
+						{
+							"name": "derivedColumnforUSD"
+						},
+						{
+							"name": "selecttargetdata"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Period as date,",
+						"          Product as string,",
+						"          {Unit Price} as double,",
+						"          Currency as string,",
+						"          {Units Sold} as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> exceldatasource",
+						"source(output(",
+						"          FromCurrency as string,",
+						"          ToCurrency as string,",
+						"          Date as date,",
+						"          ExchangeRate as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'excel',",
+						"     fileSystem: 'stagging',",
+						"     folderPath: 'Azure-Data-Factory-datasets.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData',",
+						"     fileName: 'ExchangeRates.xlsx',",
+						"     sheetName: 'Sheet1',",
+						"     firstRowAsHeader: true) ~> exchangerate4jolly",
+						"exceldatasource filter(Product!= 'Month Total') ~> filter1",
+						"exchangerate4jolly filter(ToCurrency=='USD') ~> filtercurrencytoUSD",
+						"filter1, filtercurrencytoUSD lookup(Currency == FromCurrency",
+						"     && Period == Date,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupexchangerate",
+						"lookupexchangerate derive(SalesValueUSD = round({Unit Price}*{Units Sold}*ExchangeRate,2)) ~> derivedColumnforUSD",
+						"derivedColumnforUSD select(mapColumn(",
+						"          Product,",
+						"          {Unit Price},",
+						"          {Units Sold},",
+						"          Date,",
+						"          SalesValueUSD",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selecttargetdata",
+						"selecttargetdata sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          RowId as integer,",
+						"          Retailer as string,",
+						"          SalesMonth as date,",
+						"          Product as string,",
+						"          ManufacturerProductCode as string,",
+						"          SalesValueUSD as decimal(18,2),",
+						"          UnitsSold as integer",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     truncate:true,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          SalesMonth = Date,",
+						"          Product,",
+						"          SalesValueUSD,",
+						"          UnitsSold = {Units Sold}",
+						"     )) ~> targent"
+					]
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Onpremlinkedservice')]"
+				"[concat(variables('factoryId'), '/datasets/Excelsource')]",
+				"[concat(variables('factoryId'), '/linkedServices/datalinkedservice')]",
+				"[concat(variables('factoryId'), '/datasets/sqldatabase')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "project1lookup",
-						"type": "Lookup",
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -455,96 +613,22 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT \ns.name AS SchemaName,\nt.name AS TableName\nFROM sys.Tables t\nINNER JOIN sys.Schemas s \nON t.schema_id = s.schema_id\nWHERE s.name ='Sales' OR s.name ='HumanResources'\nOR s.name ='Person' OR s.name ='Production'\n",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "Onpremdataset",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "project1lookup",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('project1lookup').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SqlServerSource",
-											"sqlReaderQuery": {
-												"value": "SELECT * FROM @{item().SchemaName}.@{item().TableName}",
-												"type": "Expression"
-											},
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "JsonSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "JsonWriteSettings"
-											}
-										},
-										"enableStaging": false
-									},
-									"inputs": [
-										{
-											"referenceName": "Onpremdataset",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "bronzelayerdataset",
-											"type": "DatasetReference",
-											"parameters": {
-												"schema": {
-													"value": "@item().SchemaName",
-													"type": "Expression"
-												},
-												"table": {
-													"value": "@item().TableName",
-													"type": "Expression"
-												}
-											}
-										}
-									]
+							"dataflow": {
+								"referenceName": "dataflow4excel",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"exceldatasource": {},
+									"exchangerate4jolly": {},
+									"targent": {}
 								}
-							]
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
 						}
 					}
 				],
@@ -554,8 +638,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Onpremdataset')]",
-				"[concat(variables('factoryId'), '/datasets/bronzelayerdataset')]"
+				"[concat(variables('factoryId'), '/dataflows/dataflow4excel')]"
 			]
 		}
 	]

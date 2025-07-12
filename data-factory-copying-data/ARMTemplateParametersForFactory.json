@@ -5,52 +5,22 @@
 		"factoryName": {
 			"value": "data-factory-copying-data"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"datalinkedservice_accountKey": {
 			"value": ""
 		},
-		"AzureSynapseAnalytics1_password": {
+		"sqldatalinked_password": {
 			"value": ""
 		},
-		"Onpremlinkedservice_password": {
-			"value": ""
+		"datalinkedservice_properties_typeProperties_url": {
+			"value": "https://sdadfdata.dfs.core.windows.net/"
 		},
-		"cloudlinkedservice_accountKey": {
-			"value": ""
-		},
-		"targetdblinked service_password": {
-			"value": ""
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://sdproject8source.dfs.core.windows.net/"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_server": {
-			"value": "dbtargetsynapse.sql.azuresynapse.net"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_database": {
-			"value": "targentdata"
-		},
-		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
-			"value": "Ramon"
-		},
-		"Onpremlinkedservice_properties_typeProperties_server": {
-			"value": "RAMON\\SQLEXPRESS"
-		},
-		"Onpremlinkedservice_properties_typeProperties_database": {
-			"value": "AdventureWorks2008R2"
-		},
-		"Onpremlinkedservice_properties_typeProperties_userName": {
-			"value": "sa"
-		},
-		"cloudlinkedservice_properties_typeProperties_url": {
-			"value": "https://sdbronzelayerrawdata.dfs.core.windows.net/"
-		},
-		"targetdblinked service_properties_typeProperties_server": {
+		"sqldatalinked_properties_typeProperties_server": {
 			"value": "project8server.database.windows.net"
 		},
-		"targetdblinked service_properties_typeProperties_database": {
-			"value": "project8database"
+		"sqldatalinked_properties_typeProperties_database": {
+			"value": "dbprojectadf"
 		},
-		"targetdblinked service_properties_typeProperties_userName": {
+		"sqldatalinked_properties_typeProperties_userName": {
 			"value": "Ramon"
 		}
 	}
