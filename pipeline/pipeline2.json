@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflow4excel",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"parameters": {
+							"parameter1": "$parameter1"
+						}
 					},
 					"compute": {
 						"coreCount": 8,
