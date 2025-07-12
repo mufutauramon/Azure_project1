@@ -48,9 +48,6 @@
 				}
 			],
 			"scriptLines": [
-				"parameters{",
-				"     parameter as string",
-				"}",
 				"source(output(",
 				"          Period as date,",
 				"          Product as string,",
