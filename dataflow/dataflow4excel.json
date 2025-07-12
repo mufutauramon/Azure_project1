@@ -1,0 +1,37 @@
+{
+	"name": "dataflow4excel",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Excelsource",
+						"type": "DatasetReference"
+					},
+					"name": "exceldatasource",
+					"description": "The source is the excel file for jollygoods"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Period as date,",
+				"          Product as string,",
+				"          {Unit Price} as double,",
+				"          Currency as string,",
+				"          {Units Sold} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> exceldatasource",
+				"exceldatasource filter(Product!= 'Month Total') ~> filter1"
+			]
+		}
+	}
+}
