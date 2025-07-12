@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "dataflow4excel",
-						"type": "DataFlowReference",
-						"parameters": {
-							"parameter": {
-								"value": "@pipeline().RunId",
-								"type": "Expression"
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
