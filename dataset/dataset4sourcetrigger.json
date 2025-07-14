@@ -1,0 +1,23 @@
+{
+	"name": "dataset4sourcetrigger",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice4trigger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Sales (1).csv",
+				"fileSystem": "trigerfiler"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
