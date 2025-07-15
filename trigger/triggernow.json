@@ -1,0 +1,25 @@
+{
+	"name": "triggernow",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline4",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 2,
+				"startTime": "2025-07-16T16:55:00",
+				"endTime": "2025-07-16T16:55:00",
+				"timeZone": "Central Standard Time"
+			}
+		}
+	}
+}
