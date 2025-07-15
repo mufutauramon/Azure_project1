@@ -62,10 +62,6 @@
 		"sqldatalinked_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Ramon"
-		},
-		"storagetrigger_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/e0d2f8aa-aa26-4ea2-9f71-e5bf6347ee04/resourceGroups/project8/providers/Microsoft.Storage/storageAccounts/sdproject9"
 		}
 	},
 	"variables": {
@@ -903,7 +899,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/storagetrigger')]",
+			"name": "[concat(parameters('factoryName'), '/scheduletrigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -918,14 +914,15 @@
 						"parameters": {}
 					}
 				],
-				"type": "BlobEventsTrigger",
+				"type": "ScheduleTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/landing/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('storagetrigger_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 1,
+						"startTime": "2025-07-15T22:56:00",
+						"endTime": "2025-07-16T23:02:00",
+						"timeZone": "Central Standard Time"
+					}
 				}
 			},
 			"dependsOn": [
