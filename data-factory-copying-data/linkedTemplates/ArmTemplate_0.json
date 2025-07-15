@@ -63,7 +63,7 @@
 			"type": "string",
 			"defaultValue": "Ramon"
 		},
-		"eventbasetrigger_properties_typeProperties_scope": {
+		"storagetrigger_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/e0d2f8aa-aa26-4ea2-9f71-e5bf6347ee04/resourceGroups/project8/providers/Microsoft.Storage/storageAccounts/sdproject9"
 		}
@@ -903,7 +903,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/eventbasetrigger')]",
+			"name": "[concat(parameters('factoryName'), '/storagetrigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -922,7 +922,7 @@
 				"typeProperties": {
 					"blobPathBeginsWith": "/landing/blobs/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('eventbasetrigger_properties_typeProperties_scope')]",
+					"scope": "[parameters('storagetrigger_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]

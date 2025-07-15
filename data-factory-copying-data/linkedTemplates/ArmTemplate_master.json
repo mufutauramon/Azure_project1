@@ -63,7 +63,7 @@
 			"type": "string",
 			"defaultValue": "Ramon"
 		},
-		"eventbasetrigger_properties_typeProperties_scope": {
+		"storagetrigger_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/e0d2f8aa-aa26-4ea2-9f71-e5bf6347ee04/resourceGroups/project8/providers/Microsoft.Storage/storageAccounts/sdproject9"
 		},
@@ -136,32 +136,12 @@
 					"sqldatalinked_properties_typeProperties_userName": {
 						"value": "[parameters('sqldatalinked_properties_typeProperties_userName')]"
 					},
-					"eventbasetrigger_properties_typeProperties_scope": {
-						"value": "[parameters('eventbasetrigger_properties_typeProperties_scope')]"
+					"storagetrigger_properties_typeProperties_scope": {
+						"value": "[parameters('storagetrigger_properties_typeProperties_scope')]"
 					}
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "data-factory-copying-data_ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'data-factory-copying-data_ArmTemplate_0')]"
-			]
 		}
 	]
 }
