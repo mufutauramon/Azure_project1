@@ -224,7 +224,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data1",
+						"name": "Ingest_Sales_To_Bronze",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -259,6 +259,20 @@
 								}
 							},
 							"enableStaging": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Info",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "project9linkedservice",
+										"type": "LinkedServiceReference"
+									},
+									"path": "landing"
+								}
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"typeConversion": true,
@@ -294,7 +308,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/landingdaset')]",
-				"[concat(variables('factoryId'), '/datasets/bronzedataset')]"
+				"[concat(variables('factoryId'), '/datasets/bronzedataset')]",
+				"[concat(variables('factoryId'), '/linkedServices/project9linkedservice')]"
 			]
 		},
 		{
@@ -764,42 +779,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/scheduletrigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline4",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 1,
-						"startTime": "2025-07-16T06:18:00",
-						"timeZone": "Central Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline4')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/storagetrigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
