@@ -1,0 +1,22 @@
+{
+	"name": "bronzedataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "project9linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "project_9"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
