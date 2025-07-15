@@ -1,0 +1,25 @@
+{
+	"name": "landingdaset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "project9linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "project_9"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
