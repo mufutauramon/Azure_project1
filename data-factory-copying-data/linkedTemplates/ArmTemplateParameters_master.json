@@ -5,14 +5,38 @@
 		"factoryName": {
 			"value": "data-factory-copying-data"
 		},
+		"AzureSynapseAnalytics1_password": {
+			"value": ""
+		},
 		"datalinkedservice_accountKey": {
+			"value": ""
+		},
+		"linkedservice4trigger_accountKey": {
+			"value": ""
+		},
+		"project9linkedservice_accountKey": {
 			"value": ""
 		},
 		"sqldatalinked_password": {
 			"value": ""
 		},
+		"AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"value": "dbtargetsynapse.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"value": "goldproject9"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
+			"value": "ramon"
+		},
 		"datalinkedservice_properties_typeProperties_url": {
 			"value": "https://sdadfdata.dfs.core.windows.net/"
+		},
+		"linkedservice4trigger_properties_typeProperties_url": {
+			"value": "https://sdtrigger.dfs.core.windows.net/"
+		},
+		"project9linkedservice_properties_typeProperties_url": {
+			"value": "https://sdproject9.dfs.core.windows.net/"
 		},
 		"sqldatalinked_properties_typeProperties_server": {
 			"value": "project8server.database.windows.net"
@@ -22,6 +46,9 @@
 		},
 		"sqldatalinked_properties_typeProperties_userName": {
 			"value": "Ramon"
+		},
+		"eventbasetrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/e0d2f8aa-aa26-4ea2-9f71-e5bf6347ee04/resourceGroups/project8/providers/Microsoft.Storage/storageAccounts/sdproject9"
 		},
 		"containerUri": {
 			"value": ""

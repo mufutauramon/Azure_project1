@@ -7,17 +7,49 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "data-factory-copying-data"
 		},
+		"AzureSynapseAnalytics1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSynapseAnalytics1'"
+		},
 		"datalinkedservice_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'datalinkedservice'"
+		},
+		"linkedservice4trigger_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'linkedservice4trigger'"
+		},
+		"project9linkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'project9linkedservice'"
 		},
 		"sqldatalinked_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'sqldatalinked'"
 		},
+		"AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "dbtargetsynapse.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "goldproject9"
+		},
+		"AzureSynapseAnalytics1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ramon"
+		},
 		"datalinkedservice_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sdadfdata.dfs.core.windows.net/"
+		},
+		"linkedservice4trigger_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sdtrigger.dfs.core.windows.net/"
+		},
+		"project9linkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sdproject9.dfs.core.windows.net/"
 		},
 		"sqldatalinked_properties_typeProperties_server": {
 			"type": "string",
@@ -30,6 +62,10 @@
 		"sqldatalinked_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "Ramon"
+		},
+		"eventbasetrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/e0d2f8aa-aa26-4ea2-9f71-e5bf6347ee04/resourceGroups/project8/providers/Microsoft.Storage/storageAccounts/sdproject9"
 		},
 		"containerUri": {
 			"type": "string",
@@ -58,14 +94,38 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSynapseAnalytics1_password": {
+						"value": "[parameters('AzureSynapseAnalytics1_password')]"
+					},
 					"datalinkedservice_accountKey": {
 						"value": "[parameters('datalinkedservice_accountKey')]"
+					},
+					"linkedservice4trigger_accountKey": {
+						"value": "[parameters('linkedservice4trigger_accountKey')]"
+					},
+					"project9linkedservice_accountKey": {
+						"value": "[parameters('project9linkedservice_accountKey')]"
 					},
 					"sqldatalinked_password": {
 						"value": "[parameters('sqldatalinked_password')]"
 					},
+					"AzureSynapseAnalytics1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_server')]"
+					},
+					"AzureSynapseAnalytics1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_database')]"
+					},
+					"AzureSynapseAnalytics1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSynapseAnalytics1_properties_typeProperties_userName')]"
+					},
 					"datalinkedservice_properties_typeProperties_url": {
 						"value": "[parameters('datalinkedservice_properties_typeProperties_url')]"
+					},
+					"linkedservice4trigger_properties_typeProperties_url": {
+						"value": "[parameters('linkedservice4trigger_properties_typeProperties_url')]"
+					},
+					"project9linkedservice_properties_typeProperties_url": {
+						"value": "[parameters('project9linkedservice_properties_typeProperties_url')]"
 					},
 					"sqldatalinked_properties_typeProperties_server": {
 						"value": "[parameters('sqldatalinked_properties_typeProperties_server')]"
@@ -75,10 +135,33 @@
 					},
 					"sqldatalinked_properties_typeProperties_userName": {
 						"value": "[parameters('sqldatalinked_properties_typeProperties_userName')]"
+					},
+					"eventbasetrigger_properties_typeProperties_scope": {
+						"value": "[parameters('eventbasetrigger_properties_typeProperties_scope')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "data-factory-copying-data_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'data-factory-copying-data_ArmTemplate_0')]"
+			]
 		}
 	]
 }
