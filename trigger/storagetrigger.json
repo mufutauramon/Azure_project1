@@ -2,11 +2,11 @@
 	"name": "storagetrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "pipeline4",
+					"referenceName": "Ingest_Sales_To_Bronze",
 					"type": "PipelineReference"
 				}
 			}
