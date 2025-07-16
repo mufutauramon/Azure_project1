@@ -28,16 +28,15 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'parquet') ~> source1",
+				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     format: 'table') ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}

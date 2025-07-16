@@ -1,0 +1,20 @@
+{
+	"name": "silverdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "project9linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "perquefile",
+				"fileSystem": "silver"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
