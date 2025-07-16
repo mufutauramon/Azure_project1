@@ -99,10 +99,6 @@
 						"type": "DataFlowReference"
 					},
 					"staging": {
-						"linkedService": {
-							"referenceName": "project9linkedservice",
-							"type": "LinkedServiceReference"
-						},
 						"folderPath": "synapsestagging"
 					},
 					"compute": {
