@@ -177,6 +177,13 @@
 						"referenceName": "dataflow1",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "project9linkedservice",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "synapsestagging"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
